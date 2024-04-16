@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=poppin:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/css/login.css">
+    <title>User Login</title>
+    
+</head>
+<body>
+
+<!-- User Login Form -->
+<div class="container mt-5 login-form">
+    <h2 class="text-center mb-4">LOGIN HERE</h2>
+    <form id="userLoginForm" method="post" action="/login">
+        <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="Enter email" required>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <!-- Links for Forgot Password and Create New Account -->
+    <div class="mt-3 text-center">
+        <a href="#">Forgot Password?</a>
+    </div>
+    <div class="mt-3 text-center new-account-link">
+        <p>Don't have an account? <a href="/signup">Create New Account</a></p>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (Make sure to include Popper.js before Bootstrap's JS) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JzjwD+mat7UQIc6XXRn38SG04GgUgBGOiJr5iZkMWS5xZl5O7/zvQ5STXN5K9tJ" crossorigin="anonymous"></script>
+
+<!-- Optional: Add your custom JavaScript for form validation here -->
+
+</body>
+</html>

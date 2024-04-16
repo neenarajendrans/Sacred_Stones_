@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="signup-form">
+                    <h2 class="mb-4">Sign Up</h2>
+                    <form id="signupForm" onsubmit="signup(event)">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" required>
+                            <div id="fullNameError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div id="emailError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required minlength="10" maxlength="10">
+                            <div id="phoneNumberError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div id="passwordError" class="text-danger"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                            <div id="confirmPasswordError" class="text-danger"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" >Sign Up</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="/login">Login Here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Custom JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const signup = async (e) => {
+            alert(e) 
+            // Clear previous error messages
+            clearErrors();
+
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            alert(0)
+            // Validation checks
+            if (!isValidFullName(fullName)) {
+                displayError("fullNameError", "Invalid Full Name");
+                return;
+            }
+            alert(1)
+            if (!isValidEmail(email)) {
+                displayError("emailError", "Invalid Email");
+                return;
+            }
+            alert(2)
+            if (!isValidPhoneNumber(phoneNumber)) {
+                displayError("phoneNumberError", "Invalid Phone Number");
+                return;
+            }
+            alert(3)
+
+            if (!isValidPassword(password)) {
+                displayError("passwordError", "Invalid Password");
+                return;
+            }
+            alert(4)
+            if (password !== confirmPassword) {
+                displayError("confirmPasswordError", "Passwords do not match");
+                return;
+            }
+            alert('Form submitted successfully!')
+            // All validations passed, proceed with form submission
+            console.log("Form submitted successfully!");
+            // Example: submitForm();
+        };
+
+        const isValidFullName = (fullName) => {
+            const fullNameRegex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+            return fullNameRegex.test(fullName.trim());
+        };
+
+        const isValidEmail = (email) => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        };
+
+        const isValidPhoneNumber = (phoneNumber) => {
+            const phoneRegex = /^[1-9]\d{9}$/;
+            return phoneRegex.test(phoneNumber);
+        };
+
+        const isValidPassword = (password) => {
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+            return passwordRegex.test(password);
+        };
+
+        const displayError = (elementId, errorMessage) => {
+            const errorElement = document.getElementById(elementId);
+            if (errorElement) {
+                errorElement.textContent = errorMessage;
+            }
+        };
+
+        const clearErrors = () => {
+            const errorElements = document.querySelectorAll(".text-danger");
+            errorElements.forEach((element) => {
+                element.textContent = "";
+            });
+        };
+    </script>
+</body>
+</html>
