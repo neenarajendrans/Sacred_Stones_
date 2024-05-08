@@ -1,7 +1,7 @@
 const mongoose =require("mongoose")
 
 const user= mongoose.Schema({
-  FullName:{
+  fullName:{
       type:String,
       required:true,
       trim: true
@@ -17,31 +17,24 @@ const user= mongoose.Schema({
   phoneNumber: {
     type: String,
     required: true,
-    match: /^(?!0+$)(?!0)/, // Regular expression to exclude strings consisting only of zeros or starting with zero
-    minlength: 10, // Example: Minimum length of 10 characters
-    maxlength: 10 // Example: Maximum length of 15 characters
+   
   },
 
   password:{
       type:String,
       required:true,
-      minlength:5
+      
 
   },
   isAdmin:{
-      type:Number,
-      default:0,
+      type:Boolean,
+      default:false,
 
   },
-  image:{
-    type:String
-   
-},
-
 
    is_blocked:{
-    type:Number,
-     default:1,
+    type:Boolean,
+     default:false,
 },
 },{ timestamps: true });
 module.exports=mongoose.model("User",user)

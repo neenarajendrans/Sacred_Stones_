@@ -55,16 +55,16 @@
     <div class="otp-container">
         <h2>Enter OTP</h2>
         <p>Check your email or phone for the OTP code.</p>
-        <form method="post" action="/otpForgot">
-            <input type="text" placeholder="Enter OTP"  name="otp" id="otpInput" maxlength="6" required>
+        <form method="post" action="/otp">
+            <input type="text" placeholder="Enter OTP"  name="otp" id="otpInput" maxlength="4" required>
             <button type="submit">Validate OTP</button>
-            <!-- <% //if (message) { %>
+            <% if (message) { %>
                 <div
                 class="alert alert-danger"
                 role="alert"
                 id="error-message"
-                ><%= //message%></div>
-                <%// }// %> -->
+                ><%= message%></div>
+                <% } %>
 
         </form>
 
@@ -75,7 +75,7 @@
 
     
 </body>
-<!-- <script>
+<script>
     let i = 30
     const timerContainer = document.querySelector("#timer")
 
@@ -90,5 +90,5 @@
         }
     },1000);
 
-</script> -->
+</script>
 </html>
