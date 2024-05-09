@@ -15,4 +15,5 @@ userRoute.get('/productdetail',userController.getProductDetailPage);
 userRoute.post('/otp',userController.verifyOtp);
 userRoute.post('/signup',userController.registerUser);
 userRoute.post('/login',userController.verifyUser);
+
 module.exports =  userRoute;

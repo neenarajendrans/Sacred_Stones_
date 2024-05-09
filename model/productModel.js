@@ -9,11 +9,6 @@ const Product = new mongoose.Schema({
         type: String,
         required: true,
       },
-      image:{
-        type:String,
-        default:'',
-        required:true, 
-      },
       images:[{
         type:String,
         required:true,
@@ -49,7 +44,15 @@ const Product = new mongoose.Schema({
         min:0,
         max:100
       },
+      review: {
+        type: String,
+        required: true,
+      },
       is_listed:{
+        type:Boolean,
+        default:true
+    },
+      is_deleted:{
         type:Boolean,
         default:true
     },

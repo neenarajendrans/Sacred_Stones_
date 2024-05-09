@@ -54,12 +54,8 @@ const unBlockUser = asyncHandler(async(req,res)=>{
 const getAdminDashboardPage = asyncHandler(async (req, res) => {
   res.render("admin/adminPanel");
 });
-const getCategoryManagement = asyncHandler(async (req, res) => {
-  res.render("admin/categoryManagement");
-});
-const getProductManagement = asyncHandler(async (req, res) => {
-  res.render("admin/productManagement");
-});
+
+
 // const getAdminDashboardPage = asyncHandler(async (req, res) => {
 //   res.render("admin/adminPanel");
 // });
@@ -84,4 +80,4 @@ const getProductManagement = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { getAdminLoginPage, getAdminDashboardPage, adminLogin ,loadUserManagement,getCategoryManagement, blockUser , unBlockUser, getProductManagement};
+module.exports = { getAdminLoginPage, getAdminDashboardPage, adminLogin ,loadUserManagement, blockUser , unBlockUser};

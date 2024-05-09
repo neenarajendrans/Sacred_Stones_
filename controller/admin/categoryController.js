@@ -3,10 +3,15 @@ const path=require('path')
 const Category = require("../../model/categoryModel");
 const User=require("../../model/userModel")
 const asyncHandler = require('express-async-handler')
+// GET CATEGORY
+const getCategoryManagement = asyncHandler(async (req, res) => {
+    res.render("admin/categoryManagement");
+  });
 
 // ADD CATEGORY
 const addCatagory = asyncHandler(async(req,res)=>{
-    const {name , description}= req.body;
+  const {name , description}= req.body;
+  console.log("7777777777",req.body)
     let category = new Category({name, description}); // created new category model 
 
     category = await category.save(); // filled it with data
@@ -17,7 +22,21 @@ const addCatagory = asyncHandler(async(req,res)=>{
     res.send(category);
 }
 )
+const getAddCategory = asyncHandler(async (req, res) => {
+    res.render("admin/addCategory");
+  });
+const getEditCategory = asyncHandler(async (req, res) => {
+    res.render("admin/editCategory");
+  });
+  const getDeleteCategory = asyncHandler(async (req, res) => {
+    res.render("admin/categoryManagement");
+  });
+
 
 module.exports = {
-    addCatagory
+     getCategoryManagement,
+     getDeleteCategory,
+     getEditCategory,
+     addCatagory,
+     getAddCategory
 }
