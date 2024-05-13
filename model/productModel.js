@@ -46,7 +46,7 @@ const Product = new mongoose.Schema({
       },
       review: {
         type: String,
-        required: true,
+      
       },
       is_listed:{
         type:Boolean,

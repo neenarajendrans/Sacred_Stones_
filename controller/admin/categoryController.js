@@ -20,6 +20,7 @@ const addCatagory = asyncHandler(async(req,res)=>{
         return res.status(404).send('The category cannot be created');
 
     res.send(category);
+    
 }
 )
 const getAddCategory = asyncHandler(async (req, res) => {
