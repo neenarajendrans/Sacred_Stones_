@@ -12,7 +12,7 @@ const getAdminLoginPage = asyncHandler(async (req, res) => {
 const adminLogin = asyncHandler((req, res) => {
   console.log("0000000000000", req.body);
   const {email, password}= req.body;
-  if (email === "sacredstonesnrs@gmail.com" && password === "Neena@1999") {
+  if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
 
     res.redirect("/admin/dashboard");
   }

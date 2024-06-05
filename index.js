@@ -4,8 +4,7 @@ const userRoute = require("./route/userRoute")
 const adminRoute = require("./route/adminRoute")
 const orderRoute = require("./route/orderRoute")
 const cartRoute = require("./route/cartRoute")
-// const passport = require('passport');
-// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 const dotenv = require('dotenv').config();
 const path = require('path');
 const dbConnection = require('./config/dbConnection');
@@ -13,7 +12,7 @@ const session = require('express-session');
 const morgan = require('morgan');
 const colors = require('colors');
 const {disableCacheMiddleware} = require("./middleware/userAuth")
-const { signInWithGoogle, signInWithPopup }=require('./firebase');
+
 const app = express();
 const port = process.env.PORT || 5001;
 dbConnection();
