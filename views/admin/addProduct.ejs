@@ -180,6 +180,89 @@
                 </div>
             </footer>
         </main>
+        <!-- <script>
+            document.getElementById('productForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+            
+                let isValid = true;
+            
+                // Clear previous error messages
+                document.querySelectorAll('.error-message').forEach(function(el) {
+                    el.textContent = '';
+                });
+            
+                // Validation rules
+                const name = event.target.name.value.trim();
+                const description = event.target.description.value.trim();
+                const totalPrice = event.target.total_price.value.trim();
+                const discountPrice = event.target.discount_price.value.trim();
+                const category = event.target.category.value.trim();
+                const goldPurity = event.target.gold_purity.value.trim();
+                const grossWeight = event.target.gross_weight.value.trim();
+                const makingCharge = event.target.making_charge.value.trim();
+                const stock = event.target.stock.value.trim();
+            
+                const lettersOnly = /^[a-zA-Z\s]+$/;
+                const numbersOnly = /^[0-9]+(\.[0-9]+)?$/;
+            
+                if (!name.match(lettersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_name').textContent = 'Product Name must contain only letters.';
+                }
+            
+                if (!description.match(lettersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_description').textContent = 'Description must contain only letters.';
+                }
+            
+                if (!totalPrice.match(numbersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_total_price').textContent = 'Total Price must contain only numbers.';
+                }
+            
+                if (!discountPrice.match(numbersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_discount_price').textContent = 'Discount Price must contain only numbers.';
+                }
+            
+                if (!category) {
+                    isValid = false;
+                    document.getElementById('error_category').textContent = 'Please select a category.';
+                }
+            
+                if (!goldPurity.match(numbersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_gold_purity').textContent = 'Gold Purity must contain only numbers.';
+                }
+            
+                if (!grossWeight.match(numbersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_gross_weight').textContent = 'Gross Weight must contain only numbers.';
+                }
+            
+                if (!makingCharge.match(numbersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_making_charge').textContent = 'Making Charges must contain only numbers.';
+                }
+            
+                if (!stock.match(numbersOnly)) {
+                    isValid = false;
+                    document.getElementById('error_stock').textContent = 'Stock must contain only numbers.';
+                }
+            
+                if (isValid) {
+                    event.target.submit(); // Submit the form if all validations pass
+                }
+            });
+            </script>
+            
+            <style>
+            .error-message {
+                color: red;
+                font-size: 0.9em;
+                margin-top: 0.2em;
+            }
+            </style> -->
         <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
         <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
         <script src="/assets/js/vendors/select2.min.js"></script>

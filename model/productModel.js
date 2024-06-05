@@ -51,15 +51,8 @@ const Product = new mongoose.Schema({
       is_listed:{
         type:Boolean,
         default:true
-    },
-      is_deleted:{
-        type:Boolean,
-        default:true
-    },
-    isVisible:{
-      type:Boolean,
-      default:true
-  }
+    }
+      
  
 });
 

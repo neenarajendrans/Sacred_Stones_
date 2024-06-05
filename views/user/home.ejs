@@ -141,6 +141,49 @@
         </section>
     </div>
 
+     <!-- All Product section -->
+
+     <section class="price_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                   All Products
+                </h2>
+            </div>
+            <div class="price_container">
+               
+                <% product.forEach ((ele)=>{%>
+                    <% if(ele.is_listed ) { %>
+                <div class="box">
+                    <div class="name">
+                        <h6>
+                          <%= ele.name %>
+                        </h6>
+                    </div>
+                    <div class="img-box">
+                        
+                        <img src="/assets/imgs/productIMG/<%= ele.images[0] %>" style="width: 300px;" alt="">
+                         
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            jadsfjhj
+                        </h5>
+                        <a href="/productdetail?id=<%=ele.id%>">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+                <%} })%>
+               
+               
+                
+           
+        </div>
+    </section>
+
+    <!-- end All Product section -->
+
     <!-- about section -->
 
     <section class="about_section layout_padding2-top layout_padding-bottom">
@@ -185,127 +228,7 @@
 
     <!-- Jewellery section -->
 
-    <section class="price_section layout_padding">
-        <div class="container">
-            <div class="heading_container">
-                <h2>
-                    Jewelry that inspires.
-                </h2>
-            </div>
-            <div class="price_container">
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Earrings
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/img_3.jpg" style="width: 300px;" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            <span></span>
-                        </h5>
-                        <a href="">
-                            Show More
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Hand Chains
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/img_4.jpg" style="width: 300px;" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            <span></span>
-                        </h5>
-                        <a href="">
-                            Show More
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Bangles
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/img_1.jpg" style="width: 300px;" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            <span></span>
-                        </h5>
-                        <a href="">
-                            Show More
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Necklaces
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/img_5.jpg" style="width: 300px;" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            <span></span>
-                        </h5>
-                        <a href="">
-                            Show More
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Rings
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/img_6.jpg" style="width: 300px;" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            <span></span>
-                        </h5>
-                        <a href="">
-                            Show More
-                        </a>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="name">
-                        <h6>
-                            Pendent Necklaces
-                        </h6>
-                    </div>
-                    <div class="img-box">
-                        <img src="images/img_2.jpg" style="width: 300px;" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            <span></span>
-                        </h5>
-                        <a href="">
-                            Show More
-                        </a>
-                    </div>
-                </div>
-               
-                
-           
-        </div>
-    </section>
+ 
 
     <!-- end Jewellery section -->
 

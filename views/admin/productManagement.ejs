@@ -36,34 +36,7 @@
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <header class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col col-check flex-grow-0">
-                                <div class="form-check ms-2">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                                <select class="form-select">
-                                    <option selected>All category</option>
-                                    <option>Electronics</option>
-                                    <option>Clothes</option>
-                                    <option>Automobile</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 col-6">
-                                <input type="date" value="02.05.2021" class="form-control">
-                            </div>
-                            <div class="col-md-2 col-6">
-                                <select class="form-select">
-                                    <option selected>Status</option>
-                                    <option>Active</option>
-                                    <option>Disabled</option>
-                                    <option>Show all</option>
-                                </select>
-                            </div>
-                        </div>
-                    </header> <!-- card-header end// -->
+                 <!-- card-header end// -->
                     <div class="card-body">
                         <h2>List of Products</h2> <!-- Heading for the table -->
                         <table class="table">
@@ -102,13 +75,19 @@
                                     <td><span class="badge rounded-pill alert-success">Active</span></td>
                                     <td></td>
                                     <td>
-                                        <a href="#" class="btn btn-sm font-sm rounded btn-brand">
-                                            <i class="material-icons md-edit"></i> Edit
-                                        </a>
-                                        <a href="#" class="btn btn-sm font-sm btn-light rounded">
-                                            <i class="material-icons md-delete_forever"></i> Delete
-                                        </a>
+                                        
+                                        <a class="btn btn-sm font-sm btn-light rounded" href="/admin/editproduct/<%=ele._id %>">Edit</a>
+                                        <% if (ele.is_listed) { %>
+                                            <a class="btn btn-sm font-sm btn-light rounded " href="/admin/unlistproduct/<%= ele._id %>">
+                                                  Unlist</a>
+                                              <% }else{ %> 
+                                                <a class="btn btn-sm font-sm btn-light rounded " href="/admin/listproduct/<%= ele._id %>">
+                                                  List
+                                              <% } %> 
+                                            </a>
+                                      
                                     </td>
+                                    
                                 </tr>
                                 <% }) %>
                             </tbody>

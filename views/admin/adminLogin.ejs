@@ -1,30 +1,37 @@
 
-<%- include ("../layout/adminHeader")%>
-<!-- Admin Login Form -->
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form id="adminLoginForm" method="post" action="/admin/login">
-                <div class="form-group">
-                    <label for="inputEmail">Email address</label>
-                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Enter email" required>
+
+<%- include ("../layout/admintemHeader")%>
+
+<body>
+    <main>
+     
+        <section class="content-main ">
+            <div class="card mx-auto card-login">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Admin Login</h4>
+                   
+                    <form method="post" action="/admin/login">
+                       
+                        <div class="mb-3">
+                            <input class="form-control" placeholder="email" name="email" type="text">
+                        </div> <!-- form-group// -->
+                        <div class="mb-3">
+                            <input class="form-control" placeholder="Password" name="password" type="password">
+                        </div> <!-- form-group// -->
+                        <!-- form-group form-check .// -->
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-primary w-100"> Login </button>
+                        </div> <!-- form-group// -->
+                    </form>
+                    
                 </div>
-                <div class="form-group">
-                    <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="inputPassword" name="Password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS and jQuery (Make sure to include Popper.js before Bootstrap's JS) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JzjwD+mat7UQIc6XXRn38SG04GgUgBGOiJr5iZkMWS5xZl5O7/zvQ5STXN5K9tJ" crossorigin="anonymous"></script>
-
-<!-- Optional: Add your custom JavaScript for form validation here -->
-
+            </div>
+        </section>
+       
+    </main>
+   
 </body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-account-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:33 GMT -->
 </html>

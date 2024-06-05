@@ -4,7 +4,7 @@
     <main class="main-wrap">
  
 
-        <form action="/admin/addCategory" method="post"id="category-form" >
+        <form action="/admin/addCategory" method="post" id="category-form"  >
             <section class="content-main">
                 <div class="row">
                     <div class="col-9">
@@ -30,12 +30,12 @@
                                 </div>
                             </div>
                         </div> <!-- card end// -->
-                    </div>
-                
                         <div>
                             <input type="submit" value="submit" class="btn btn-md rounded font-sm hover-up">
                         </div>
-        
+                    </div>
+                    
+                
                         <!-- <div id="invalid">
                             <%// if (typeof error !=='undefined' && error) { %>
                                 <p class="text-danger" id="message">
@@ -55,15 +55,54 @@
                     </div>
                     </div>
                 </div>
-            </section> <!-- content-main end// -->
+            </section>
+             <!-- content-main end// -->
         </form>
+        <style>
+            .error-message {
+                color: red;
+            }
+        </style>
+        <!-- <script>
+            function validateForm(event) {
+                // Regular expression for letters only
+                const lettersOnly = /^[A-Za-z\s]+$/;
+    
+                // Get form elements
+                const categoryName = document.getElementById('category_name');
+                const description = document.getElementById('description');
+                const categoryNameError = document.getElementById('category_name-error');
+                const descriptionError = document.getElementById('description-error');
+    
+                // Clear previous error messages
+                categoryNameError.textContent = '';
+                descriptionError.textContent = '';
+    
+                let isValid = true;
+    
+                // Validate category name
+                if (!lettersOnly.test(categoryName.value.trim())) {
+                    categoryNameError.textContent = 'Category name must contain only letters.';
+                    isValid = false;
+                }
+    
+                // Validate description
+                if (!lettersOnly.test(description.value.trim())) {
+                    descriptionError.textContent = 'Description must contain only letters.';
+                    isValid = false;
+                }
+    
+                // If the form is not valid, prevent form submission
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            }
+    
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('category-form').addEventListener('submit', validateForm);
+            });
+        </script> -->
         
-        <script>
-            
-     
-        
-           
-        </script>
         
         
         

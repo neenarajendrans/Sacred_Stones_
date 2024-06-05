@@ -58,18 +58,18 @@
         <form method="post" action="/otp">
             <input type="text" placeholder="Enter OTP"  name="otp" id="otpInput" maxlength="4" required>
             <button type="submit">Validate OTP</button>
-            <% if (message) { %>
+            <!-- <% //if (message) { %>
                 <div
                 class="alert alert-danger"
                 role="alert"
                 id="error-message"
-                ><%= message%></div>
-                <% } %>
+                ><%//= message%></div>
+                <% //} %> -->
 
         </form>
 
         <div class="container mt-2 fw-bold" id="timer">
-          30 
+          30
         </div>
     </div>
 
@@ -79,11 +79,16 @@
     let i = 30
     const timerContainer = document.querySelector("#timer")
 
+    console.log(timerContainer)
+
     const intervelId = setInterval(() => {
         if(i<=0){
             clearInterval(intervelId)
-            const resendButton = <a href="/resend">Resend OTP</a>
-            timerContainer.innerHTML = resendButton;
+            const resendButton = document.createElement("a");
+            resendButton.href = "/resend";
+            resendButton.textContent = "Resend OTP";
+            timerContainer.innerHTML = '';
+            timerContainer.appendChild(resendButton);
         }else{
             i--;
             timerContainer.innerHTML = i;

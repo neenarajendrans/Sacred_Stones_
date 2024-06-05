@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const User = require("../../model/userModel");
 const bcrypt = require("bcrypt");
 const message = require("../../config/mailer");
+const Product = require("../../model/productModel");
+const Category = require("../../model/categoryModel");
 
 const securePassword = asyncHandler(async (password) => {
   const passwordHash = await bcrypt.hash(password, 10);
@@ -10,172 +12,164 @@ const securePassword = asyncHandler(async (password) => {
 
 //@des Get index page
 //@route Get /
-//@access  public
-
+//@access public
 const getIndexPage = asyncHandler(async (req, res) => {
+  if (req.session.user_id) {
+    return res.redirect("/home");
+  }
   res.render("user/index");
 });
-// //@des Get signup page
-// //@route Get /signup
-// //@access  public
 
+//@des Get signup page
+//@route Get /signup
+//@access public
 const getSignupPage = asyncHandler(async (req, res) => {
+  if (req.session.user_id) {
+    return res.redirect("/home");
+  }
   res.render("user/signup");
 });
+
 //@des Post Signup / Register User
 //@route Post /signup
-//@access  public
-
+//@access public
 const registerUser = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const { fullName, email, phoneNumber, password } = req.body;
   const existMail = await User.findOne({ email: email });
+
   if (existMail) {
     return res.render("user/login", {
       message: "This user already exists",
     });
   } else {
     req.session.userData = req.body;
-    req.session.regiser = 1;
     req.session.email = email;
-    if (req.session.email) {
-      const data = await message.sendVarifyMail(req, req.session.email);
-      res.redirect("/otp");
-    }
+    const data = await message.sendVarifyMail(req, req.session.email);
+    res.redirect("/otp");
   }
-
-  // const hashedPassword = await bcrypt.hash(password,10);
-  // const user = new User({ fullName, email, phoneNumber, password:hashedPassword });
-  // await user.save();
-  // res.render("user/login")
-  // console.log(user);
 });
+
 //@des Get otp page
 //@route Get /otp
-//@access  public
-
+//@access User
 const getOtpPage = asyncHandler(async (req, res) => {
   res.render("user/otp");
 });
 
 //@des verify OTP
 //@route post /otp
-//@access  public
-
+//@access User
 const verifyOtp = asyncHandler(async (req, res) => {
   const userData = req.session.userData;
-  const firstDigit = req.body.first;
-  const secondDigit = req.body.second;
-  const thirdDigit = req.body.third;
-  const fourthDigit = req.body.fourth;
-  const fullOTP = firstDigit + secondDigit + thirdDigit + fourthDigit;
 
-  console.log({userData,firstDigit,secondDigit,thirdDigit,fourthDigit,fullOTP,sessionOTP:req.session.otp})
-
-  if (!req.session.user_id) {
-    if (req.body.otp == req.session.otp) {
-      console.log("elon ma")
-      const secure_password = await securePassword(userData.password);
-      const user = new User({
-        fullName: userData.fullName,
-        email: userData.email,
-        phoneNumber: userData.phoneNumber,
-        password: secure_password,
-      });
-
-      const userDataSave = await user.save();
-      if (userDataSave && userDataSave.isAdmin === false) {
-        req.session.user_id = userDataSave._id;
-        res.redirect("/home");
-      } else {
-        return res.render("user/otp", { message: "Registration Failed" });
-      }
-    } else {
-      return res.render("user/otp", {
-        message: "invailid otp. Please enter the correct OTP.",
-      });
+  if (req.body.otp == req.session.otp) {
+    if (userData.is_blocked) {
+      return res.redirect("/");
     }
-  } else {
-    if (fullOTP == req.session.otp) {
-      res.redirect("/resetPassword"); // reset password
-    } else {
-      return res.render("user/otp", {
-        message: "invailid otp. Please enter the correct OTP.",
-      });
-    }
-  }
-});
-//@des Get  login page
-//@route Get /login
-//@access  public
 
-const getLoginPage = asyncHandler(async (req, res) => {
-  res.render("user/login");
-});
-//@des post  login page
-//@route post /login
-//@access  public
-const verifyUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  console.log(req.body);
-  const userData = await User.findOne({ email: email });
-  console.log(userData);
-  if (userData) {
-    const passwordMatch = await bcrypt.compare(password, userData.password);
-    if (
-      passwordMatch 
-      // userData.isAdmin === false &&
-      // userData.is_blocked == false
-    ) {
+    const secure_password = await securePassword(userData.password);
+    const user = new User({
+      fullName: userData.fullName,
+      email: userData.email,
+      phoneNumber: userData.phoneNumber,
+      password: secure_password,
+    });
+
+    const userDataSave = await user.save();
+    if (userDataSave && !userDataSave.isAdmin) {
+      req.session.user_id = userDataSave._id;
       res.redirect("/home");
     } else {
-      // Handle incorrect password or user not authorized
-      return res.status(401).redirect("/login");
+      return res.render("user/otp", { message: "Registration Failed" });
     }
   } else {
-    // Handle user not found
-    return res.status(401).redirect("/login");
+    return res.render("user/otp", {
+      message: "Invalid OTP. Please enter the correct OTP.",
+    });
   }
+});
+
+//@des Get login page
+//@route Get /login
+//@access user
+const getLoginPage = asyncHandler(async (req, res) => {
+  if (req.session.user_id) {
+    return res.redirect("/home");
+  }
+  res.render("user/login", { message: '' });
+});
+
+//@des post login page
+//@route post /login
+//@access user
+const verifyUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const userData = await User.findOne({ email: email });
+
+  if (userData) {
+    const passwordMatch = await bcrypt.compare(password, userData.password);
+    if (passwordMatch) {
+      req.session.user_id = userData._id;
+      res.redirect("/home");
+    } else {
+      return res.redirect("/login");
+    }
+  } else {
+    return res.redirect("/login");
+  }
+});
+
+//@des logout user
+//@route redirect /
+//@access user
+const logout = asyncHandler(async (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.redirect('/home');
+    }
+    res.redirect('/login');
+  });
 });
 
 //@des Get home page
-//@route Get /
-//@access  public
-
+//@route Get /home
+//@access authorized User
 const getHomePage = asyncHandler(async (req, res) => {
-  res.render("user/home");
+  const category = await Category.find({});
+  const product = await Product.find({});
+  res.render("user/home", { category, product });
 });
-//@des Get about page
-//@route Get /
-//@access  public
 
+//@des Get about page
+//@route Get /about
+//@access authorized User
 const getAboutPage = asyncHandler(async (req, res) => {
   res.render("user/about");
 });
-//@des Get contact page
-//@route Get /
-//@access  public
 
+//@des Get contact page
+//@route Get /contact
+//@access authorized User
 const getContactPage = asyncHandler(async (req, res) => {
   res.render("user/contact");
 });
-//@des Get Jewellery page
-//@route Get /
-//@access  public
 
+//@des Get Jewellery page
+//@route Get /jewellery
+//@access authorized User
 const getJewelleryPage = asyncHandler(async (req, res) => {
-  res.render("user/jewellery");
+  const product = await Product.find({});
+  const category = await Category.find({});
+  res.render("user/jewellery", { product, category });
 });
-//@des Get Jewellery page
-//@route Get /
-//@access  public
 
+//@des Get product details page
+//@route Get /productdetails
+//@access public
 const getProductDetailPage = asyncHandler(async (req, res) => {
-  res.render("user/productDetailed");
+  const product = await Product.findOne({ _id: req.query.id });
+  res.render("user/productDetailed", { product });
 });
-
-
-
 
 module.exports = {
   getIndexPage,
@@ -189,5 +183,23 @@ module.exports = {
   registerUser,
   verifyUser,
   verifyOtp,
-  getProductDetailPage
+  getProductDetailPage,
+  logout,
+  resendOtp: asyncHandler(async (req, res) => {
+    const data = await message.sendVarifyMail(req, req.session.email);
+    res.redirect("/otp");
+  }),
+  registerGoogleUser: asyncHandler(async (req, res) => {
+    res.redirect('/home');
+  })
 };
+
+// if (req.body.forgotPassword) {
+//   if (req.body.otp == req.session.otp) {
+//     res.redirect("/resetPassword");
+//   } else {
+//     return res.render("user/otp", {
+//       message: "Invalid OTP. Please enter the correct OTP.",
+//     });
+//   }
+// }

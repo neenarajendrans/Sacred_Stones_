@@ -11,15 +11,10 @@ const getAdminLoginPage = asyncHandler(async (req, res) => {
 
 const adminLogin = asyncHandler((req, res) => {
   console.log("0000000000000", req.body);
-  if (
-    req.body.email === "sacredstonesnrs@gmail.com" &&
-    req.body.password === "Neena@1999"
-  ) {
-    req.session.isAdmin = true;
+  const {email, password}= req.body;
+  if (email === "sacredstonesnrs@gmail.com" && password === "Neena@1999") {
+
     res.redirect("/admin/dashboard");
-  } else {
-    req.session.message = "Invalid Credentials";
-    res.redirect("/admin/login");
   }
 });
 
@@ -31,21 +26,19 @@ const loadUserManagement = asyncHandler(async (req, res) => {
   res.render("admin/userManagement", { users });
 });
 
-const blockUser = asyncHandler(async(req,res)=>{
-    const userId = req.params._id;
-    console.log(req.params.id);
-    const userData = await User.updateOne({_id : userId},{$set:{is_blocked : true}});
-    const users = await User.find({});
-  console.log(users);
-    res.status(200).json({success:true})
+const blockUser = asyncHandler(async (req, res) => {
+  console.log('inside block user')
+  const userId = req.params.id;
+  await User.updateOne({ _id: userId }, { $set: { is_blocked: true } });
+  res.status(200).json({ success: true });
+});//session clear at block
 
-})
 
-const unBlockUser = asyncHandler(async(req,res)=>{
-    const userId = req.params._id;
-    const userData = User.updateOne({_id: userId}, { is_blocked : false})
-    res.status(200).json({success:true})
-})
+const unblockUser = asyncHandler(async (req, res) => {
+  const userId = req.params.id;
+  await User.updateOne({ _id: userId }, { $set: { is_blocked: false } });
+  res.status(200).json({ success: true });
+});
 
 // @des Get adminlogin page
 //@route Get /admin
@@ -80,4 +73,4 @@ const getAdminDashboardPage = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { getAdminLoginPage, getAdminDashboardPage, adminLogin ,loadUserManagement, blockUser , unBlockUser};
+module.exports = { getAdminLoginPage, getAdminDashboardPage, adminLogin ,loadUserManagement, blockUser , unblockUser};
