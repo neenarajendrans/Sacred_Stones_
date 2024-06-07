@@ -1,8 +1,8 @@
 const adminAuth = (req, res, next) => {
     if (req.session.adminId) {
-        next();
+       return next();
     } else {        
-        res.redirect('/admin'); 
+        res.redirect('/admin/login'); 
     }
 };
 module.exports=adminAuth;
